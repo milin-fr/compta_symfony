@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Company
      * @ORM\ManyToOne(targetEntity=WorkType::class, inversedBy="companies")
      */
     private $workType;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bill::class, mappedBy="company")
+     */
+    private $bills;
+
+    public function __construct()
+    {
+        $this->bills = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,37 @@ class Company
     public function setWorkType(?WorkType $workType): self
     {
         $this->workType = $workType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bill[]
+     */
+    public function getBills(): Collection
+    {
+        return $this->bills;
+    }
+
+    public function addBill(Bill $bill): self
+    {
+        if (!$this->bills->contains($bill)) {
+            $this->bills[] = $bill;
+            $bill->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBill(Bill $bill): self
+    {
+        if ($this->bills->contains($bill)) {
+            $this->bills->removeElement($bill);
+            // set the owning side to null (unless already changed)
+            if ($bill->getCompany() === $this) {
+                $bill->setCompany(null);
+            }
+        }
 
         return $this;
     }

@@ -32,6 +32,11 @@ class Bill
      */
     private $priceCent;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="bills")
+     */
+    private $company;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Bill
     public function setPriceCent(?int $priceCent): self
     {
         $this->priceCent = $priceCent;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
