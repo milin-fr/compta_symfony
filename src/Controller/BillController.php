@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Bill;
 use App\Form\BillType;
 use App\Repository\BillRepository;
+use App\Repository\WorkTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,25 +27,12 @@ class BillController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="bill_new", methods={"GET","POST"})
+     * @Route("/new", name="bill_new", methods={"GET"})
      */
-    public function new(Request $request): Response
+    public function new(WorkTypeRepository $workTypeRepository): Response
     {
-        $bill = new Bill();
-        $form = $this->createForm(BillType::class, $bill);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($bill);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('bill_index');
-        }
-
         return $this->render('bill/new.html.twig', [
-            'bill' => $bill,
-            'form' => $form->createView(),
+            'workTypes' => $workTypeRepository->findAll(),
         ]);
     }
 

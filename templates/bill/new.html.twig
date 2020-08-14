@@ -1,11 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Bill{% endblock %}
+{% block title %}Nouvelle facture{% endblock %}
 
 {% block body %}
-    <h1>Create new Bill</h1>
-
-    {{ include('bill/_form.html.twig') }}
-
-    <a href="{{ path('bill_index') }}">back to list</a>
+    <h1>Ajouter une nouvelle facture</h1>
+    <form action="{{ path('bill_post') }}" method="POST">
+        <div id="work-type--form">
+            <label for="work-type">Type de charges :</label>
+            <input id="work-type" name="work-type" type="text" list="work-type--list" required="true">
+            <datalist id="work-type--list">
+                {% for workType in workTypes %}
+                    <option value="{{ workType.title }}"></option>
+                {% endfor %}
+                <option value="one"></option>
+                <option value="two"></option>
+            </datalist>
+        </div>
+        <div id="company--form">
+            <label for="company">Entreprise :</label>
+            <input id="company" name="company" type="text" list="company--list" required="true">
+            <datalist id="company--list">
+                <option value="one"></option>
+                <option value="two"></option>
+            </datalist>
+        </div>
+        <div id="bill-price--form">
+            <label for="bill--price-euro">Prix :</label>
+            <input type="number" name="bill--price-euro" id="bill--price-euro" pattern="[0-9]" min="0" required="true">
+            <label for="bill--price-cent">,</label>
+            <input type="number" name="bill--price-cent" id="bill--price-cent" pattern="[0-9]" min="0" max="99" required="true">
+        </div>
+        <div id="bill-description--form">
+            <label for="bill--description">Descriptif de la facture :</label>
+            <textarea name="bill--description" id="bill--description" cols="50" rows="5" required="true"></textarea>
+        </div>
+        <input type="submit" value="Enregistrer">
+    </form>
 {% endblock %}
