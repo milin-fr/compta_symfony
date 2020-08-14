@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\WorkTypeRepository;
+use App\Repository\CompanyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=WorkTypeRepository::class)
+ * @ORM\Entity(repositoryClass=CompanyRepository::class)
  */
-class WorkType
+class Company
 {
     /**
      * @ORM\Id()
