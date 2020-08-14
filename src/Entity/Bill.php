@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=BillRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Bill
 {
@@ -122,5 +123,21 @@ class Bill
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /** 
+     * @ORM\PrePersist
+     */
+    public function generateCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /** 
+     * @ORM\PreUpdate
+     */
+    public function generateUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
     }
 }
