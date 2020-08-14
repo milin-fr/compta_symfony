@@ -37,6 +37,16 @@ class Bill
      */
     private $company;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $cratedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class Bill
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getCratedAt(): ?\DateTimeInterface
+    {
+        return $this->cratedAt;
+    }
+
+    public function setCratedAt(?\DateTimeInterface $cratedAt): self
+    {
+        $this->cratedAt = $cratedAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
