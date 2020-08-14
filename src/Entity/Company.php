@@ -22,6 +22,11 @@ class Company
      */
     private $title;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=WorkType::class, inversedBy="companies")
+     */
+    private $workType;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Company
     public function setTitle(?string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getWorkType(): ?WorkType
+    {
+        return $this->workType;
+    }
+
+    public function setWorkType(?WorkType $workType): self
+    {
+        $this->workType = $workType;
 
         return $this;
     }
