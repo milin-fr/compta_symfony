@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Ajouter une nouvelle facture</h1>
-    <form action="{{ path('bill_post') }}" method="POST">
+    <form action="{{ path('bill_post') }}" method="POST" id="bill--form">
         <div id="work-type--form">
             <label for="work-type">Type de charges :</label>
             <input id="work-type" name="work-type" type="text" list="work-type--list" required="true">
@@ -12,16 +12,13 @@
                 {% for workType in workTypes %}
                     <option value="{{ workType.title }}"></option>
                 {% endfor %}
-                <option value="one"></option>
-                <option value="two"></option>
             </datalist>
         </div>
         <div id="company--form">
             <label for="company">Entreprise :</label>
             <input id="company" name="company" type="text" list="company--list" required="true">
             <datalist id="company--list">
-                <option value="one"></option>
-                <option value="two"></option>
+
             </datalist>
         </div>
         <div id="bill-price--form">
@@ -36,4 +33,7 @@
         </div>
         <input type="submit" value="Enregistrer">
     </form>
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('js/billApp.js') }}"></script>
 {% endblock %}
