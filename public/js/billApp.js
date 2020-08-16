@@ -1,6 +1,7 @@
 var app = {
     init: function() {
       document.querySelector("#bill--form").addEventListener("submit", app.addBill);
+      document.querySelector("#work-type").addEventListener("change", app.displayCompaniesList);
     },
     addBill: function(event) {
       event.preventDefault();
@@ -19,6 +20,10 @@ var app = {
         console.log(error);
       });
     },
+    displayCompaniesList: function() {
+      document.querySelector("#company").disabled = false;
+      document.querySelector("#company").focus();
+    }
 };
   
 document.addEventListener('DOMContentLoaded', app.init);

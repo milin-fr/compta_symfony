@@ -53,4 +53,13 @@ class ApiController extends AbstractController
         $em->flush();
         return $this->json(null, 200, [], []);
     }
+
+    /**
+     * @Route("/company", name="company_get", methods={"GET"})
+     */
+    public function companyGet(CompanyRepository $companyRepository)
+    {
+        $companies = $companyRepository->findAll();
+        return $this->json($companies, 200, [], ['groups' => 'get:company']);
+    }
 }

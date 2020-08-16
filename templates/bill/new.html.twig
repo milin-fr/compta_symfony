@@ -16,20 +16,20 @@
         </div>
         <div id="company--form">
             <label for="company">Entreprise :</label>
-            <input id="company" name="company" type="text" list="company--list" required="true">
+            <input id="company" name="company" type="text" list="company--list" required="true" disabled>
             <datalist id="company--list">
 
             </datalist>
         </div>
         <div id="bill-price--form">
             <label for="bill--price-euro">Prix :</label>
-            <input type="number" name="bill--price-euro" id="bill--price-euro" pattern="[0-9]" min="0" required="true">
+            <input type="number" name="bill--price-euro" id="bill--price-euro" pattern="[0-9]" min="0" required="true" disabled>
             <label for="bill--price-cent">,</label>
-            <input type="number" name="bill--price-cent" id="bill--price-cent" pattern="[0-9]" min="0" max="99" required="true">
+            <input type="number" name="bill--price-cent" id="bill--price-cent" pattern="[0-9]" min="0" max="99" required="true" disabled>
         </div>
         <div id="bill-description--form">
             <label for="bill--description">Descriptif de la facture :</label>
-            <textarea name="bill--description" id="bill--description" cols="50" rows="5" required="true"></textarea>
+            <textarea name="bill--description" id="bill--description" cols="50" rows="5" required="true" disabled></textarea>
         </div>
         <input type="submit" value="Enregistrer">
     </form>
