@@ -21,8 +21,22 @@ var app = {
       });
     },
     displayCompaniesList: function() {
-      document.querySelector("#company").disabled = false;
-      document.querySelector("#company").focus();
+      const companyInput = document.querySelector("#company");
+      companyInput.disabled = false;
+      const url = companyInput.dataset.url;
+      axios.get(url, {})
+      .then(function (response) {
+        const companyList = response.data;
+        const companyDatalist = document.querySelector("#company--list");
+        companyList.forEach(element => {
+          const option = document.createElement('option');
+          option.value = element.title;
+          companyDatalist.appendChild(option);
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
 };
   
