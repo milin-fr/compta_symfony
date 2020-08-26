@@ -29,6 +29,16 @@ class WorkType
      */
     private $companies;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $budgetEuro;
+
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $budgetCent;
+
     public function __construct()
     {
         $this->companies = new ArrayCollection();
@@ -85,5 +95,29 @@ class WorkType
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getBudgetEuro(): ?int
+    {
+        return $this->budgetEuro;
+    }
+
+    public function setBudgetEuro(?int $budgetEuro): self
+    {
+        $this->budgetEuro = $budgetEuro;
+
+        return $this;
+    }
+
+    public function getBudgetCent(): ?int
+    {
+        return $this->budgetCent;
+    }
+
+    public function setBudgetCent(?int $budgetCent): self
+    {
+        $this->budgetCent = $budgetCent;
+
+        return $this;
     }
 }
