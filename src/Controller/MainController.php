@@ -20,7 +20,7 @@ class MainController extends AbstractController
      */
     public function home(BillRepository $billRepository): Response
     {
-        return $this->render('bill/index.html.twig', [
+        return $this->render('home.html.twig', [
             'bills' => $billRepository->findAll(),
         ]);
     }

@@ -1,30 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}WorkType index{% endblock %}
+{% block title %}La liste de types de traveaux{% endblock %}
 
 {% block body %}
-    <h1>WorkType index</h1>
+    <h1>La liste de types de traveaux</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>BudgetEuro</th>
-                <th>BudgetCent</th>
+                <th>Titre</th>
+                <th>Budget</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for work_type in work_types %}
             <tr>
-                <td>{{ work_type.id }}</td>
                 <td>{{ work_type.title }}</td>
-                <td>{{ work_type.budgetEuro }}</td>
-                <td>{{ work_type.budgetCent }}</td>
+                <td>{{ work_type.budgetEuro }},{{ "%02d"|format(work_type.budgetCent) }}€</td>
                 <td>
-                    <a href="{{ path('work_type_show', {'id': work_type.id}) }}">show</a>
-                    <a href="{{ path('work_type_edit', {'id': work_type.id}) }}">edit</a>
+                    <a href="{{ path('work_type_edit', {'id': work_type.id}) }}">editer</a>
                 </td>
             </tr>
         {% else %}
