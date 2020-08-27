@@ -48,6 +48,11 @@ class Bill
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=BillStatus::class, inversedBy="bills")
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,5 +144,17 @@ class Bill
     public function generateUpdatedAt()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getStatus(): ?BillStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?BillStatus $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }
