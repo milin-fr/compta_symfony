@@ -16,9 +16,9 @@
                 </tr>
             </thead>
             <tbody>
-            {% for bill in bills %}
+            {% for company in companies %}
                 <tr>
-                    <td>{{ bill.id }}</td>
+                    <td>{{ company.id }}</td>
                 </tr>
             {% else %}
                 <tr>
@@ -33,15 +33,16 @@
             <thead>
                 <tr>
                     <th>Nom de l'entreprise</th>
-                    <th>Budget restant</th>
-                    <th>Budget prévisionnel</th>
-                    <th>Budget total</th>
+                    <th>Dépenses prévisionnelles</th>
+                    <th>Dépenses facturées</th>
                 </tr>
             </thead>
             <tbody>
-            {% for bill in bills %}
+            {% for company in companies %}
                 <tr>
-                    <td>{{ bill.id }}</td>
+                    <td>{{ company.title }}</td>
+                    <td>{{ company.provisionalEuroSum }},{{ "%02d"|format(company.provisionalCentSum) }}€</td>
+                    <td>{{ company.spentEuroSum }},{{ "%02d"|format(company.spentCentSum) }}€</td>
                 </tr>
             {% else %}
                 <tr>

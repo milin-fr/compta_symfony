@@ -30,16 +30,16 @@ class MainController extends AbstractController
         foreach($allCompanies as $company){
             $provisionalEuroSum = 0;
             $provisionalCentSum = 0;
-            $leftoverEuroSum = 0;
-            $leftoverCentSum = 0;
+            $spentEuroSum = 0;
+            $spentCentSum = 0;
             foreach($company->getBills() as $bill){
                 if($bill->getStatus()->getTitle() == "Devis"){
                     $provisionalEuroSum += $bill->getPriceEuro();
                     $provisionalCentSum += $bill->getPriceCent();
                 }
                 if($bill->getStatus()->getTitle() == "Facturé"){
-                    $leftoverEuroSum += $bill->getPriceEuro();
-                    $leftoverCentSum += $bill->getPriceCent();
+                    $spentEuroSum += $bill->getPriceEuro();
+                    $spentCentSum += $bill->getPriceCent();
                 }
             }
             $provisionalEuroSum += intdiv($provisionalCentSum, 100);
@@ -47,15 +47,16 @@ class MainController extends AbstractController
             $company->provisionalEuroSum = $provisionalEuroSum;
             $company->provisionalCentSum = $provisionalCentSum;
 
-            $leftoverEuroSum += intdiv($leftoverCentSum, 100);
-            $leftoverCentSum = $leftoverCentSum % 100;
-            $company->leftoverEuroSum = $leftoverEuroSum;
-            $company->leftoverCentSum = $leftoverCentSum;
+            $spentEuroSum += intdiv($spentCentSum, 100);
+            $spentCentSum = $spentCentSum % 100;
+            $company->spentEuroSum = $spentEuroSum;
+            $company->spentCentSum = $spentCentSum;
             $companies[] = $company;
         };
 
         return $this->render('home.html.twig', [
             'bills' => $billRepository->findAll(),
+            'companies' => $companies,
         ]);
     }
 }
