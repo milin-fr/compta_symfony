@@ -10,7 +10,7 @@
             <tr>
                 <th>Titre</th>
                 <th>Budget</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,11 +24,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Ici vous pouvez définir les types de travaux et les budgets associés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('work_type_new') }}">Create new</a>
+    <a href="{{ path('work_type_new') }}">Ajouter un type de travaux</a>
 {% endblock %}
