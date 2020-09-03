@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BillRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BillRepository::class)
@@ -20,16 +21,22 @@ class Bill
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
      */
     private $priceEuro;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Range(
+     *      min = "0",
+     *      max = "99"
+     * )
      */
     private $priceCent;
 

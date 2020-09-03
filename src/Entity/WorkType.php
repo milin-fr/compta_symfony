@@ -6,6 +6,7 @@ use App\Repository\WorkTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=WorkTypeRepository::class)
@@ -21,6 +22,7 @@ class WorkType
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank
      */
     private $title;
 
@@ -31,11 +33,17 @@ class WorkType
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
      */
     private $budgetEuro;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Range(
+     *      min = "0",
+     *      max = "99",
+    *       notInRangeMessage = "La valeur doit est compris entre {{ min }} et {{ max }}",
+     * )
      */
     private $budgetCent;
 
