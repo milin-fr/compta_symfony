@@ -5,7 +5,15 @@
 {% block body %}
     <h1>Create new WorkType</h1>
 
-    {{ include('work_type/_form.html.twig') }}
+{{ form_start(form) }}
+    {{ form_label(form.title, 'Type de charges') }}
+    {{ form_widget(form.title) }}
+    {{ form_label(form.budgetEuro, 'Budget en Euros') }}
+    {{ form_widget(form.budgetEuro) }}
+    {{ form_label(form.budgetCent, 'Budget en Centimes') }}
+    {{ form_widget(form.budgetCent) }}
+    <input class="hidden" type="submit" id="worktype--submit-btn">
+{{ form_end(form) }}
+<label class="btn btn-primary" for="worktype--submit-btn">Enregistrer</label>
 
-    <a href="{{ path('work_type_index') }}">back to list</a>
 {% endblock %}

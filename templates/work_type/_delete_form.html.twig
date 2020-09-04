@@ -1,5 +1,0 @@
-<form method="post" action="{{ path('work_type_delete', {'id': work_type.id}) }}" onsubmit="return confirm('Est-ce que vous voulez supprimer ce type de charges ??');">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ work_type.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
-</form>

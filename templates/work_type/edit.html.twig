@@ -6,13 +6,10 @@
     <h1>Edit WorkType</h1>
     {{ form_start(form) }}
     {{ form_label(form.title, 'Type de charges') }}
-    {{ form_errors(form.title) }}
     {{ form_widget(form.title) }}
     {{ form_label(form.budgetEuro, 'Budget en Euros') }}
-    {{ form_errors(form.budgetEuro) }}
     {{ form_widget(form.budgetEuro) }}
     {{ form_label(form.budgetCent, 'Budget en Centimes') }}
-    {{ form_errors(form.budgetCent) }}
     {{ form_widget(form.budgetCent) }}
     <input class="hidden" type="submit" id="worktype--submit-btn">
     {{ form_end(form) }}
