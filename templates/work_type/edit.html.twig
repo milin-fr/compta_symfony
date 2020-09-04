@@ -4,10 +4,25 @@
 
 {% block body %}
     <h1>Edit WorkType</h1>
+    {{ form_start(form) }}
+    {{ form_label(form.title, 'Type de charges') }}
+    {{ form_errors(form.title) }}
+    {{ form_widget(form.title) }}
+    {{ form_label(form.budgetEuro, 'Budget en Euros') }}
+    {{ form_errors(form.budgetEuro) }}
+    {{ form_widget(form.budgetEuro) }}
+    {{ form_label(form.budgetCent, 'Budget en Centimes') }}
+    {{ form_errors(form.budgetCent) }}
+    {{ form_widget(form.budgetCent) }}
+    <input class="hidden" type="submit" id="worktype--submit-btn">
+    {{ form_end(form) }}
+    <div class="d-flex justify-content-between align-items-start">
+        <label class="btn btn-primary" for="worktype--submit-btn">Enregistrer</label>
+        <form method="post" action="{{ path('work_type_delete', {'id': work_type.id}) }}" onsubmit="return confirm('Est-ce que vous voulez supprimer ce type de charges ??');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ work_type.id) }}">
+        <button class="btn btn-danger">Supprimer</button>
+    </form>
 
-    {{ include('work_type/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('work_type_index') }}">back to list</a>
-
-    {{ include('work_type/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
