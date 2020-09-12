@@ -11,9 +11,9 @@
     <body>
         <div class="container">
             <nav class="navbar navbar-light bg-light">
-                <a href="#">Placeholder 1</a>
-                <a href="#">Placeholder 2</a>
-                <a href="#">Placeholder 3</a>
+                <a href="{{ path('bill_new') }}">Nouvelle facture</a>
+                <a href="{{ path('bill_index') }}">Liste des factures</a>
+                <a href="{{ path('company_index') }}">Menu des entreprises</a>
                 <a href="{{ path('work_type_index') }}">Menu des charges</a>
             </nav>
             {% block body %}{% endblock %}
