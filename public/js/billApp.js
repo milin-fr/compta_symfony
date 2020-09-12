@@ -7,7 +7,7 @@ var app = {
       event.preventDefault();
       const url = this.action;
       axios.post(url, {
-        "workTypeTitle": this.querySelector('input[name="work-type"]').value,
+        "workTypeTitle": this.querySelector('select[name="work-type"]').value,
         "companyTitle": this.querySelector('input[name="company"]').value,
         "billEuro": this.querySelector('input[name="bill--price-euro"]').value,
         "billCent": this.querySelector('input[name="bill--price-cent"]').value,
@@ -23,11 +23,20 @@ var app = {
     displayCompaniesList: function() {
       const companyInput = document.querySelector("#company");
       companyInput.disabled = false;
+      document.querySelector("#bill--price-euro").disabled = false;
+      document.querySelector("#bill--price-cent").disabled = false;
+      document.querySelector("#bill--status").disabled = false;
+      document.querySelector("#bill--description").disabled = false;
       const url = companyInput.dataset.url;
-      axios.get(url, {})
+      console.log(document.querySelector('select[name="work-type"]').value)
+      axios.post(url, {
+        "workTypeTitle": document.querySelector('select[name="work-type"]').value
+      })
       .then(function (response) {
+        console.log(response.data)
         const companyList = response.data;
         const companyDatalist = document.querySelector("#company--list");
+        companyDatalist.innerHTML = "";
         companyList.forEach(element => {
           const option = document.createElement('option');
           option.value = element.title;

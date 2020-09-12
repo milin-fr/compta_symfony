@@ -51,15 +51,18 @@ class ApiController extends AbstractController
         $bill->setPriceCent($billCent);
         $em->persist($bill);
         $em->flush();
-        return $this->json(null, 200, [], []);
+        return $this->redirectToRoute('home');
     }
 
     /**
-     * @Route("/company", name="company_get", methods={"GET"})
+     * @Route("/work-type/company", name="company_get_by_work_type", methods={"POST"})
      */
-    public function companyGet(CompanyRepository $companyRepository)
+    public function companyGetByWorkType(Request $request, CompanyRepository $companyRepository, WorkTypeRepository $workTypeRepository)
     {
-        $companies = $companyRepository->findAll();
+        $contentObject = json_decode($request->getContent());
+        $workTypeTitle = $contentObject->workTypeTitle;
+        $workType = $workTypeRepository->findOneBy(['title' => $workTypeTitle]);
+        $companies = $workType->getCompanies();
         return $this->json($companies, 200, [], ['groups' => 'get:company']);
     }
 }

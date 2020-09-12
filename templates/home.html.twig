@@ -3,22 +3,23 @@
 {% block title %}Aperçu général{% endblock %}
 
 {% block body %}
-    <h1>Aperçu général</h1>
+    <h1 class="h1 text-center mb-5">Aperçu général</h1>
     <div class="container--content">
         <div class="container---content-per-worktype">
+        <h2 class="h2 text-center">Comptes par type de travaux</h2>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Type de travaux</th>
-                    <th>Budget restant</th>
-                    <th>Budget prévisionnel</th>
-                    <th>Budget total</th>
+                    <th class="lead">Type de travaux</th>
+                    <th class="lead">Budget restant</th>
+                    <th class="lead">Budget prévisionnel</th>
+                    <th class="lead">Budget total</th>
                 </tr>
             </thead>
             <tbody>
             {% for company in companies %}
                 <tr>
-                    <td>{{ company.id }}</td>
+                    <td class="lead">{{ company.id }}</td>
                 </tr>
             {% else %}
                 <tr>
@@ -29,12 +30,13 @@
         </table>
         </div>
         <div class="container--content-per-company">
+        <h2 class="h2 text-center">Comptes par entreprise</h2>
             <table class="table">
             <thead>
                 <tr>
-                    <th>Nom de l'entreprise</th>
-                    <th>Dépenses prévisionnelles</th>
-                    <th>Dépenses facturées</th>
+                    <th class="lead">Nom de l'entreprise</th>
+                    <th class="lead">Dépenses prévisionnelles</th>
+                    <th class="lead">Dépenses facturées</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,20 +54,30 @@
             </tbody>
         </table>
         </div>
-        <div class="container--content-total">
-            <table class="table">
+    </div>
+    <div class="container--content-per-company">
+        <h2 class="h2 text-center">Liste des factures</h2>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Type de travaux</th>
-                    <th>Budget restant</th>
-                    <th>Budget prévisionnel</th>
-                    <th>Budget total</th>
+                    <th class="lead">Id</th>
+                    <th class="lead">Description</th>
+                    <th class="lead">PriceEuro</th>
+                    <th class="lead">PriceCent</th>
+                    <th class="lead">actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for bill in bills %}
                 <tr>
                     <td>{{ bill.id }}</td>
+                    <td>{{ bill.description }}</td>
+                    <td>{{ bill.priceEuro }}</td>
+                    <td>{{ bill.priceCent }}</td>
+                    <td>
+                        <a href="{{ path('bill_show', {'id': bill.id}) }}">show</a>
+                        <a href="{{ path('bill_edit', {'id': bill.id}) }}">edit</a>
+                    </td>
                 </tr>
             {% else %}
                 <tr>
@@ -74,37 +86,7 @@
             {% endfor %}
             </tbody>
         </table>
-        </div>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Description</th>
-                <th>PriceEuro</th>
-                <th>PriceCent</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for bill in bills %}
-            <tr>
-                <td>{{ bill.id }}</td>
-                <td>{{ bill.description }}</td>
-                <td>{{ bill.priceEuro }}</td>
-                <td>{{ bill.priceCent }}</td>
-                <td>
-                    <a href="{{ path('bill_show', {'id': bill.id}) }}">show</a>
-                    <a href="{{ path('bill_edit', {'id': bill.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
     <a href="{{ path('bill_new') }}">Create new</a>
 {% endblock %}

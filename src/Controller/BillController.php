@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Bill;
 use App\Form\BillType;
 use App\Repository\BillRepository;
+use App\Repository\BillStatusRepository;
 use App\Repository\WorkTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +30,11 @@ class BillController extends AbstractController
     /**
      * @Route("/new", name="bill_new", methods={"GET"})
      */
-    public function new(WorkTypeRepository $workTypeRepository): Response
+    public function new(WorkTypeRepository $workTypeRepository, BillStatusRepository $billStatusRepository): Response
     {
         return $this->render('bill/new.html.twig', [
             'workTypes' => $workTypeRepository->findAll(),
+            'billStatuses' => $billStatusRepository->findAll(),
         ]);
     }
 

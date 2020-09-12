@@ -7,19 +7,27 @@
     <form action="{{ path('bill_post') }}" method="POST" id="bill--form">
         <div id="work-type--form">
             <label for="work-type">Type de charges :</label>
-            <input id="work-type" name="work-type" type="text" list="work-type--list" required="true">
-            <datalist id="work-type--list">
+            <select id="work-type" name="work-type" required="true">
+                <option value="" disabled selected>Selectionez le type de travaux</option>
                 {% for workType in workTypes %}
-                    <option value="{{ workType.title }}"></option>
+                    <option value="{{ workType.title }}">{{ workType.title }}</option>
                 {% endfor %}
-            </datalist>
+            </select>
         </div>
         <div id="company--form">
             <label for="company">Entreprise :</label>
-            <input id="company" name="company" type="text" list="company--list" required="true" data-url="{{ path('company_get') }}" disabled>
+            <input id="company" name="company" type="text" list="company--list" required="true" data-url="{{ path('company_get_by_work_type') }}" disabled autocomplete="off">
             <datalist id="company--list">
-
+                <!-- JS inserts company list here depending on work type selected -->
             </datalist>
+        </div>
+        <div id="bill-status--form">
+            <label for="bill--status">L’état de la facture :</label>
+            <select id="bill--status" name="bill--status" required="true" disabled>
+                {% for billStatus in billStatuses %}
+                    <option value="{{ billStatus.title }}">{{ billStatus.title }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div id="bill-price--form">
             <label for="bill--price-euro">Prix :</label>
