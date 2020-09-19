@@ -11,10 +11,11 @@
     <body>
         <div class="container">
             <nav class="navbar navbar-light bg-light">
-                <a href="{{ path('bill_new') }}">Nouvelle facture</a>
-                <a href="{{ path('bill_index') }}">Liste des factures</a>
-                <a href="{{ path('company_index') }}">Menu des entreprises</a>
-                <a href="{{ path('work_type_index') }}">Menu des charges</a>
+                <a id="home-page--link" href="{{ path('home') }}" class="btn btn-light">Aperçu général</a>
+                <a href="{{ path('bill_new') }}" class="btn btn-light">Nouvelle facture</a>
+                <a href="{{ path('bill_index') }}" class="btn btn-light">Liste des factures</a>
+                <a href="{{ path('company_index') }}" class="btn btn-light">Menu des entreprises</a>
+                <a href="{{ path('work_type_index') }}" class="btn btn-light">Menu des types de travaux</a>
             </nav>
             {% block body %}{% endblock %}
         </div>

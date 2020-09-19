@@ -1,39 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bill index{% endblock %}
+{% block title %}La liste des factures{% endblock %}
 
 {% block body %}
-    <h1>Bill index</h1>
-
+    <h1 class="h1 text-center">La liste des factures</h1>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Description</th>
-                <th>PriceEuro</th>
-                <th>PriceCent</th>
-                <th>actions</th>
+                <th>Status</th>
+                <th>Type de travaux</th>
+                <th>Entreprise</th>
+                <th>Prix</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for bill in bills %}
             <tr>
-                <td>{{ bill.id }}</td>
                 <td>{{ bill.description }}</td>
-                <td>{{ bill.priceEuro }}</td>
-                <td>{{ bill.priceCent }}</td>
+                <td>{{ bill.status.title }}</td>
+                <td>{{ bill.company.workType.title }}</td>
+                <td>{{ bill.company.title }}</td>
+                <td>{{ bill.priceEuro }},{{ "%02d"|format(bill.priceCent) }}€</td>
                 <td>
-                    <a href="{{ path('bill_show', {'id': bill.id}) }}">show</a>
-                    <a href="{{ path('bill_edit', {'id': bill.id}) }}">edit</a>
+                    <a href="{{ path('bill_edit', {'id': bill.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Pas de factures</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('bill_new') }}">Create new</a>
 {% endblock %}

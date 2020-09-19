@@ -24,8 +24,10 @@ class MainController extends AbstractController
     {
 
         $allCompanies = $companyRepository->findAll();
+        $allWorkTypes = $workTypeRepository->findAll();
 
         $companies = [];
+        $workTypes = [];
 
         foreach($allCompanies as $company){
             $provisionalEuroSum = 0;

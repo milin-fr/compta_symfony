@@ -3,8 +3,10 @@
 {% block title %}La liste de types de charges{% endblock %}
 
 {% block body %}
-    <h1>La liste de types de charges</h1>
-
+    <h1 class="h1 text-center">La liste de types de charges</h1>
+    <div class="d-flex justify-content-end">
+        <a href="{{ path('work_type_new') }}" class="btn btn-primary mb-5">Ajouter un type de travaux</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -19,7 +21,7 @@
                 <td>{{ work_type.title }}</td>
                 <td>{{ work_type.budgetEuro }},{{ "%02d"|format(work_type.budgetCent) }}€</td>
                 <td>
-                    <a href="{{ path('work_type_edit', {'id': work_type.id}) }}">editer</a>
+                    <a href="{{ path('work_type_edit', {'id': work_type.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -29,6 +31,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('work_type_new') }}">Ajouter un type de travaux</a>
 {% endblock %}

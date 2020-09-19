@@ -20,6 +20,9 @@
             {% for company in companies %}
                 <tr>
                     <td class="lead">{{ company.id }}</td>
+                    <td class="lead">{{ company.id }}</td>
+                    <td class="lead">{{ company.id }}</td>
+                    <td class="lead">{{ company.id }}</td>
                 </tr>
             {% else %}
                 <tr>
@@ -60,23 +63,24 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="lead">Id</th>
                     <th class="lead">Description</th>
-                    <th class="lead">PriceEuro</th>
-                    <th class="lead">PriceCent</th>
-                    <th class="lead">actions</th>
+                    <th class="lead">Entreprise</th>
+                    <th class="lead">Type de travaux</th>
+                    <th class="lead">Prix</th>
+                    <th class="lead">Status</th>
+                    <th class="lead">Actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for bill in bills %}
                 <tr>
-                    <td>{{ bill.id }}</td>
                     <td>{{ bill.description }}</td>
-                    <td>{{ bill.priceEuro }}</td>
-                    <td>{{ bill.priceCent }}</td>
+                    <td>{{ bill.company }}</td>
+                    <td>{{ bill.company.workType }}</td>
+                    <td>{{ bill.priceEuro }},{{ "%02d"|format(bill.priceCent) }}€</td>
+                    <td>{{ bill.status }}</td>
                     <td>
-                        <a href="{{ path('bill_show', {'id': bill.id}) }}">show</a>
-                        <a href="{{ path('bill_edit', {'id': bill.id}) }}">edit</a>
+                        <a href="{{ path('bill_edit', {'id': bill.id}) }}">Modifier</a>
                     </td>
                 </tr>
             {% else %}

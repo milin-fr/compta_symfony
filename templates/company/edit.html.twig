@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Company{% endblock %}
+{% block title %}Modifier l'entreprise{% endblock %}
 
 {% block body %}
-    <h1>Edit Company</h1>
+    <h1>Modifier l'entreprise</h1>
+    {{ form_start(form) }}
+    {{ form_label(form.title, 'Nom de l\'entreprise :') }}
+    {{ form_widget(form.title) }}
+    {{ form_label(form.workType, 'Type de travaux :') }}
+    {{ form_widget(form.workType) }}
+    <input class="hidden" type="submit" id="company--submit-btn">
+    {{ form_end(form) }}
+    <div class="d-flex justify-content-between align-items-start">
+        <label class="btn btn-primary" for="company--submit-btn">Enregistrer</label>
+        <form method="post" action="{{ path('company_delete', {'id': company.id}) }}" onsubmit="return confirm('Est-ce que vous voulez supprimer cette entreprise ?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ company.id) }}">
+        <button class="btn btn-danger">Supprimer</button>
+    </form>
 
-    {{ include('company/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
 
-    <a href="{{ path('company_index') }}">back to list</a>
-
-    {{ include('company/_delete_form.html.twig') }}
 {% endblock %}

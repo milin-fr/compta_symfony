@@ -9,12 +9,14 @@ var app = {
       axios.post(url, {
         "workTypeTitle": this.querySelector('select[name="work-type"]').value,
         "companyTitle": this.querySelector('input[name="company"]').value,
+        "statusTitle": this.querySelector('select[name="bill--status"]').value,
         "billEuro": this.querySelector('input[name="bill--price-euro"]').value,
         "billCent": this.querySelector('input[name="bill--price-cent"]').value,
         "billDescription": this.querySelector('textarea[name="bill--description"]').value,
       })
       .then(function (response) {
-        console.log(response);
+        const redirectUrl = document.querySelector('#home-page--link').href
+        window.location.replace(redirectUrl);
       })
       .catch(function (error) {
         console.log(error);
@@ -28,12 +30,10 @@ var app = {
       document.querySelector("#bill--status").disabled = false;
       document.querySelector("#bill--description").disabled = false;
       const url = companyInput.dataset.url;
-      console.log(document.querySelector('select[name="work-type"]').value)
       axios.post(url, {
         "workTypeTitle": document.querySelector('select[name="work-type"]').value
       })
       .then(function (response) {
-        console.log(response.data)
         const companyList = response.data;
         const companyDatalist = document.querySelector("#company--list");
         companyDatalist.innerHTML = "";

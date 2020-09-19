@@ -13,6 +13,7 @@ class BillType extends AbstractType
     {
         $builder
             ->add('description')
+            ->add('status')
             ->add('priceEuro')
             ->add('priceCent')
             ->add('company')

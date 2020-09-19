@@ -3,33 +3,32 @@
 {% block title %}Company index{% endblock %}
 
 {% block body %}
-    <h1>Company index</h1>
-
+    <h1 class="h1 text-center">Menu des entreprises</h1>
+    <div class="d-flex justify-content-end">
+        <a href="{{ path('company_new') }}" class="btn btn-primary mb-5">Ajouter une entreprise</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>actions</th>
+                <th>Titre</th>
+                <th>Type de travaux</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for company in companies %}
             <tr>
-                <td>{{ company.id }}</td>
                 <td>{{ company.title }}</td>
+                <td>{{ company.workType }}</td>
                 <td>
-                    <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
-                    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
+                    <a href="{{ path('company_edit', {'id': company.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucune entreprise trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('company_new') }}">Create new</a>
 {% endblock %}

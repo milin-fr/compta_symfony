@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Company{% endblock %}
+{% block title %}Ajouter une entreprise{% endblock %}
 
 {% block body %}
-    <h1>Create new Company</h1>
+    <h1>Ajouter une entreprise</h1>
 
-    {{ include('company/_form.html.twig') }}
-
-    <a href="{{ path('company_index') }}">back to list</a>
+    {{ form_start(form) }}
+        {{ form_label(form.title, 'Nom de l\'entreprise') }}
+        {{ form_widget(form.title) }}
+        {{ form_label(form.workType, 'Type de travaux') }}
+        {{ form_widget(form.workType) }}
+        <input class="hidden" type="submit" id="worktype--submit-btn">
+    {{ form_end(form) }}
+    <label class="btn btn-primary" for="worktype--submit-btn">Enregistrer</label>
 {% endblock %}

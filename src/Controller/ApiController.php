@@ -7,6 +7,7 @@ use App\Entity\Company;
 use App\Entity\WorkType;
 use App\Form\BillType;
 use App\Repository\BillRepository;
+use App\Repository\BillStatusRepository;
 use App\Repository\CompanyRepository;
 use App\Repository\WorkTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,13 +24,15 @@ class ApiController extends AbstractController
     /**
      * @Route("/bill", name="bill_post", methods={"POST"})
      */
-    public function billPost(Request $request, WorkTypeRepository $workTypeRepository, CompanyRepository $companyRepository, EntityManagerInterface $em)
+    public function billPost(Request $request, WorkTypeRepository $workTypeRepository, CompanyRepository $companyRepository, BillStatusRepository $billStatusRepository, EntityManagerInterface $em)
     {
         $contentObject = json_decode($request->getContent());
         $workTypeTitle = $contentObject->workTypeTitle;
         $companyTitle = $contentObject->companyTitle;
+        $statusTitle = $contentObject->statusTitle;
         $workType = $workTypeRepository->findOneBy(['title' => $workTypeTitle]);
         $company = $companyRepository->findOneBy(['title' => $companyTitle]);
+        $status = $billStatusRepository->findOneBy(['title' => $statusTitle]);
         $billDescription = $contentObject->billDescription;
         $billEuro = $contentObject->billEuro;
         $billCent = $contentObject->billCent;
@@ -47,11 +50,12 @@ class ApiController extends AbstractController
         $bill = new Bill();
         $bill->setDescription($billDescription);
         $bill->setCompany($company);
+        $bill->setStatus($status);
         $bill->setPriceEuro($billEuro);
         $bill->setPriceCent($billCent);
         $em->persist($bill);
         $em->flush();
-        return $this->redirectToRoute('home');
+        return $this->json([], 200, [], []);
     }
 
     /**

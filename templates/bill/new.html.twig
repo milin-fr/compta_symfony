@@ -6,8 +6,8 @@
     <h1>Ajouter une nouvelle facture</h1>
     <form action="{{ path('bill_post') }}" method="POST" id="bill--form">
         <div id="work-type--form">
-            <label for="work-type">Type de charges :</label>
-            <select id="work-type" name="work-type" required="true">
+            <label for="work-type" class="required">Type de charges :</label>
+            <select id="work-type" name="work-type" required="true"  class="form-control">
                 <option value="" disabled selected>Selectionez le type de travaux</option>
                 {% for workType in workTypes %}
                     <option value="{{ workType.title }}">{{ workType.title }}</option>
@@ -15,32 +15,33 @@
             </select>
         </div>
         <div id="company--form">
-            <label for="company">Entreprise :</label>
-            <input id="company" name="company" type="text" list="company--list" required="true" data-url="{{ path('company_get_by_work_type') }}" disabled autocomplete="off">
+            <label for="company" class="required">Entreprise :</label>
+            <input id="company" name="company" type="text" list="company--list" required="true" data-url="{{ path('company_get_by_work_type') }}" disabled autocomplete="off" class="form-control">
             <datalist id="company--list">
                 <!-- JS inserts company list here depending on work type selected -->
             </datalist>
         </div>
         <div id="bill-status--form">
-            <label for="bill--status">L’état de la facture :</label>
-            <select id="bill--status" name="bill--status" required="true" disabled>
+            <label for="bill--status" class="required">L’état de la facture :</label>
+            <select id="bill--status" name="bill--status" required="true" disabled class="form-control">
                 {% for billStatus in billStatuses %}
                     <option value="{{ billStatus.title }}">{{ billStatus.title }}</option>
                 {% endfor %}
             </select>
         </div>
         <div id="bill-price--form">
-            <label for="bill--price-euro">Prix :</label>
-            <input type="number" name="bill--price-euro" id="bill--price-euro" pattern="[0-9]" min="0" required="true" disabled>
-            <label for="bill--price-cent">,</label>
-            <input type="number" name="bill--price-cent" id="bill--price-cent" pattern="[0-9]" min="0" max="99" required="true" disabled>
+            <label for="bill--price-euro" class="required">Prix en Euros :</label>
+            <input type="number" name="bill--price-euro" id="bill--price-euro" pattern="[0-9]" min="0" required="true" disabled class="form-control">
+            <label for="bill--price-cent" class="required">Prix en centimes :</label>
+            <input type="number" name="bill--price-cent" id="bill--price-cent" pattern="[0-9]" min="0" max="99" required="true" disabled class="form-control">
         </div>
         <div id="bill-description--form">
-            <label for="bill--description">Descriptif de la facture :</label>
-            <textarea name="bill--description" id="bill--description" cols="50" rows="5" required="true" disabled></textarea>
+            <label for="bill--description" class="required">Descriptif de la facture :</label>
+            <textarea name="bill--description" id="bill--description" cols="50" rows="5" required="true" disabled class="form-control"></textarea>
         </div>
-        <input type="submit" value="Enregistrer">
+        <input class="hidden" type="submit" id="bill--submit-btn">
     </form>
+        <label class="btn btn-primary" for="bill--submit-btn">Enregistrer</label>
 {% endblock %}
 {% block javascripts %}
 	<script src="{{ asset('js/billApp.js') }}"></script>
