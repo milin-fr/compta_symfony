@@ -25,6 +25,7 @@ class MainController extends AbstractController
 
         $allCompanies = $companyRepository->findAll();
         $allWorkTypes = $workTypeRepository->findAll();
+        $allBills = $billRepository->findAll();
 
         $companies = [];
         $workTypes = [];
@@ -56,9 +57,40 @@ class MainController extends AbstractController
             $companies[] = $company;
         };
 
+        foreach ($allWorkTypes as $workType) {
+            $provisionalEuroSum = 0;
+            $provisionalCentSum = 0;
+            $spentEuroSum = 0;
+            $spentCentSum = 0;
+            foreach ($allBills as $bill) {
+                if($bill->getCompany()->getWorkType() == $workType){
+                    if($bill->getStatus()->getTitle() == "Devis"){
+                        $provisionalEuroSum += $bill->getPriceEuro();
+                        $provisionalCentSum += $bill->getPriceCent();
+                    }
+                    if($bill->getStatus()->getTitle() == "Facturé"){
+                        $spentEuroSum += $bill->getPriceEuro();
+                        $spentCentSum += $bill->getPriceCent();
+                    }
+                }
+            }
+            $provisionalEuroSum += intdiv($provisionalCentSum, 100);
+            $provisionalCentSum = $provisionalCentSum % 100;
+            $workType->provisionalEuroSum = $provisionalEuroSum;
+            $workType->provisionalCentSum = $provisionalCentSum;
+
+            $spentEuroSum += intdiv($spentCentSum, 100);
+            $spentCentSum = $spentCentSum % 100;
+            $workType->spentEuroSum = $spentEuroSum;
+            $workType->spentCentSum = $spentCentSum;
+            $workTypes[] = $workType;
+        }
+        dd($workTypes);
+
         return $this->render('home.html.twig', [
             'bills' => $billRepository->findAll(),
             'companies' => $companies,
+            'workTypes' => $workTypes,
         ]);
     }
 }
