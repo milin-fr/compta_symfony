@@ -13,8 +13,7 @@ class WorkTypeType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('budgetEuro')
-            ->add('budgetCent')
+            ->add('budget')
         ;
     }
 

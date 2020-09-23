@@ -19,7 +19,7 @@
         {% for work_type in work_types %}
             <tr>
                 <td>{{ work_type.title }}</td>
-                <td>{{ work_type.budgetEuro }},{{ "%02d"|format(work_type.budgetCent) }}€</td>
+                <td>{{ work_type.budget }}€</td>
                 <td>
                     <a href="{{ path('work_type_edit', {'id': work_type.id}) }}">Modifier</a>
                 </td>

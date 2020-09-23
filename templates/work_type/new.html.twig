@@ -8,10 +8,8 @@
 {{ form_start(form) }}
     {{ form_label(form.title, 'Type de charges') }}
     {{ form_widget(form.title) }}
-    {{ form_label(form.budgetEuro, 'Budget en Euros') }}
-    {{ form_widget(form.budgetEuro) }}
-    {{ form_label(form.budgetCent, 'Budget en Centimes') }}
-    {{ form_widget(form.budgetCent) }}
+    {{ form_label(form.budget, 'Budget') }}
+    {{ form_widget(form.budget) }}
     <input class="hidden" type="submit" id="worktype--submit-btn">
 {{ form_end(form) }}
 <label class="btn btn-primary" for="worktype--submit-btn">Enregistrer</label>
