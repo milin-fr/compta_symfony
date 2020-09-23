@@ -11,18 +11,18 @@
             <thead>
                 <tr>
                     <th class="lead">Type de travaux</th>
-                    <th class="lead">Budget restant</th>
-                    <th class="lead">Budget prévisionnel</th>
+                    <th class="lead">Dépenses prévisionnelles</th>
+                    <th class="lead">Dépenses facturées</th>
                     <th class="lead">Budget total</th>
                 </tr>
             </thead>
             <tbody>
-            {% for company in companies %}
+            {% for workType in workTypes %}
                 <tr>
-                    <td class="lead">{{ company.id }}</td>
-                    <td class="lead">{{ company.id }}</td>
-                    <td class="lead">{{ company.id }}</td>
-                    <td class="lead">{{ company.id }}</td>
+                    <td class="lead">{{ workType.title }}</td>
+                    <td>{{ workType.provisionalEuroSum }},{{ "%02d"|format(workType.provisionalCentSum) }}€</td>
+                    <td>{{ workType.spentEuroSum }},{{ "%02d"|format(workType.spentCentSum) }}€</td>
+                    <td>{{ workType.budgetEuro }},{{ "%02d"|format(workType.budgetCent) }}€</td>
                 </tr>
             {% else %}
                 <tr>
@@ -38,6 +38,7 @@
             <thead>
                 <tr>
                     <th class="lead">Nom de l'entreprise</th>
+                    <th class="lead">Type de travaux</th>
                     <th class="lead">Dépenses prévisionnelles</th>
                     <th class="lead">Dépenses facturées</th>
                 </tr>
@@ -46,6 +47,7 @@
             {% for company in companies %}
                 <tr>
                     <td>{{ company.title }}</td>
+                    <td>{{ company.workType.title }}</td>
                     <td>{{ company.provisionalEuroSum }},{{ "%02d"|format(company.provisionalCentSum) }}€</td>
                     <td>{{ company.spentEuroSum }},{{ "%02d"|format(company.spentCentSum) }}€</td>
                 </tr>

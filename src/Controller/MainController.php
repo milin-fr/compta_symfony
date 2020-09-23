@@ -76,16 +76,14 @@ class MainController extends AbstractController
             }
             $provisionalEuroSum += intdiv($provisionalCentSum, 100);
             $provisionalCentSum = $provisionalCentSum % 100;
-            $workType->provisionalEuroSum = $provisionalEuroSum;
-            $workType->provisionalCentSum = $provisionalCentSum;
-
             $spentEuroSum += intdiv($spentCentSum, 100);
             $spentCentSum = $spentCentSum % 100;
+            $workType->provisionalEuroSum = $provisionalEuroSum;
+            $workType->provisionalCentSum = $provisionalCentSum;
             $workType->spentEuroSum = $spentEuroSum;
             $workType->spentCentSum = $spentCentSum;
             $workTypes[] = $workType;
         }
-        dd($workTypes);
 
         return $this->render('home.html.twig', [
             'bills' => $billRepository->findAll(),
