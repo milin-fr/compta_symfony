@@ -31,57 +31,36 @@ class MainController extends AbstractController
         $workTypes = [];
 
         foreach($allCompanies as $company){
-            $provisionalEuroSum = 0;
-            $provisionalCentSum = 0;
-            $spentEuroSum = 0;
-            $spentCentSum = 0;
+            $provisionalSum = 0;
+            $spentSum = 0;
             foreach($company->getBills() as $bill){
                 if($bill->getStatus()->getTitle() == "Devis"){
-                    $provisionalEuroSum += $bill->getPriceEuro();
-                    $provisionalCentSum += $bill->getPriceCent();
+                    $provisionalSum += $bill->getPrice();
                 }
                 if($bill->getStatus()->getTitle() == "Facturé"){
-                    $spentEuroSum += $bill->getPriceEuro();
-                    $spentCentSum += $bill->getPriceCent();
+                    $spentSum += $bill->getPrice();
                 }
             }
-            $provisionalEuroSum += intdiv($provisionalCentSum, 100);
-            $provisionalCentSum = $provisionalCentSum % 100;
-            $company->provisionalEuroSum = $provisionalEuroSum;
-            $company->provisionalCentSum = $provisionalCentSum;
-
-            $spentEuroSum += intdiv($spentCentSum, 100);
-            $spentCentSum = $spentCentSum % 100;
-            $company->spentEuroSum = $spentEuroSum;
-            $company->spentCentSum = $spentCentSum;
+            $company->provisionalSum = $provisionalSum;
+            $company->spentSum = $spentSum;
             $companies[] = $company;
         };
 
         foreach ($allWorkTypes as $workType) {
-            $provisionalEuroSum = 0;
-            $provisionalCentSum = 0;
-            $spentEuroSum = 0;
-            $spentCentSum = 0;
+            $provisionalSum = 0;
+            $spentSum = 0;
             foreach ($allBills as $bill) {
                 if($bill->getCompany()->getWorkType() == $workType){
                     if($bill->getStatus()->getTitle() == "Devis"){
-                        $provisionalEuroSum += $bill->getPriceEuro();
-                        $provisionalCentSum += $bill->getPriceCent();
+                        $provisionalSum += $bill->getPrice();
                     }
                     if($bill->getStatus()->getTitle() == "Facturé"){
-                        $spentEuroSum += $bill->getPriceEuro();
-                        $spentCentSum += $bill->getPriceCent();
+                        $spentSum += $bill->getPrice();
                     }
                 }
             }
-            $provisionalEuroSum += intdiv($provisionalCentSum, 100);
-            $provisionalCentSum = $provisionalCentSum % 100;
-            $spentEuroSum += intdiv($spentCentSum, 100);
-            $spentCentSum = $spentCentSum % 100;
-            $workType->provisionalEuroSum = $provisionalEuroSum;
-            $workType->provisionalCentSum = $provisionalCentSum;
-            $workType->spentEuroSum = $spentEuroSum;
-            $workType->spentCentSum = $spentCentSum;
+            $workType->provisionalSum = $provisionalSum;
+            $workType->spentSum = $spentSum;
             $workTypes[] = $workType;
         }
 
