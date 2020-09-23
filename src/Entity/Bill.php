@@ -26,21 +26,6 @@ class Bill
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Positive
-     */
-    private $priceEuro;
-
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     * @Assert\Range(
-     *      min = "0",
-     *      max = "99"
-     * )
-     */
-    private $priceCent;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="bills")
      */
     private $company;
@@ -59,6 +44,12 @@ class Bill
      * @ORM\ManyToOne(targetEntity=BillStatus::class, inversedBy="bills")
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     * @Assert\Positive
+     */
+    private $price;
 
     public function getId(): ?int
     {
@@ -161,6 +152,18 @@ class Bill
     public function setStatus(?BillStatus $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?string $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

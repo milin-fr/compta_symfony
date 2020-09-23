@@ -32,20 +32,10 @@ class WorkType
     private $companies;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      * @Assert\Positive
      */
-    private $budgetEuro;
-
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     * @Assert\Range(
-     *      min = "0",
-     *      max = "99",
-    *       notInRangeMessage = "La valeur doit est compris entre {{ min }} et {{ max }}",
-     * )
-     */
-    private $budgetCent;
+    private $budget;
 
     public function __construct()
     {
@@ -125,6 +115,18 @@ class WorkType
     public function setBudgetCent(?int $budgetCent): self
     {
         $this->budgetCent = $budgetCent;
+
+        return $this;
+    }
+
+    public function getBudget(): ?string
+    {
+        return $this->budget;
+    }
+
+    public function setBudget(?string $budget): self
+    {
+        $this->budget = $budget;
 
         return $this;
     }
